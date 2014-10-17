@@ -1,0 +1,23 @@
+backup:
+  # List dbs for backup when run backup_all
+  dbs: crosswords, words
+
+  # All backups older than [today - history_days] will be deleted when run backup/backup_all
+  history_days: 5
+
+  # Temporary directory for dump files. Default system temp directory
+  temp_directory:
+
+  # [minute] [hour] [day] [month] [weekday]
+  cron_time: 0 0 * * *
+
+mongo:
+  host: 'localhost'
+  port: 27017
+  username: asd
+  password:
+
+s3:
+  access_key_id: 'access_key_id'
+  secret_access_key: 'secret_access_key'
+  bucket: 'backup_mongo_s3-backups'

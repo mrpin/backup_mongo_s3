@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/backup_mongo_s3'
+
+begin
+  BackupMongoS3::Application.new(ARGV).run
+rescue SystemExit
+  # do nothing
+rescue Exception => err
+  abort "[abort] #{err.message}"
+end
