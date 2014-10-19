@@ -96,7 +96,7 @@ module BackupMongoS3
 
         puts "backup db #{db_name.upcase}:"
 
-        tmp_dir = get_temp_dir(@config[:temp_directory])
+        tmp_dir = get_temp_dir
 
         begin
 
@@ -144,7 +144,7 @@ module BackupMongoS3
 
       puts "restore db #{db_name.upcase}:"
 
-      tmp_dir = get_temp_dir(@config[:temp_directory])
+      tmp_dir = get_temp_dir
 
       begin
 
@@ -273,7 +273,9 @@ module BackupMongoS3
       config
     end
 
-    def get_temp_dir(temp_dir)
+    def get_temp_dir
+      temp_dir = @config[:backup][:temp_directory]
+
       if temp_dir.nil? || temp_dir == ''
         temp_dir = Dir.tmpdir
       end

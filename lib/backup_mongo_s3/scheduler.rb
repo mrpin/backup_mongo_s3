@@ -8,8 +8,8 @@ module BackupMongoS3
         raise 'cron: Can only write or clear. Choose one.'
       end
 
-      if @options[:time].nil? || @options[:time] == ''
-        raise 'config.yml: cron_time is not specified'
+      unless @options[:time] =~ /\A[*\-,0-9]+ [*\-,0-9]+ [*\-,0-9]+ [*\-,0-9]+ [*\-,0-6]+\z/
+        raise 'config.yml: cron_time is not valid'
       end
     end
 
