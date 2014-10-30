@@ -1,1 +1,0 @@
-puts %x(./bin/backup_mongo_s3 --backup_all -c config.yml)

@@ -225,9 +225,6 @@ module BackupMongoS3
         create_config(path)
         exit
       end
-      @parser.on('-c', '--config PATH', String, 'Path to config *.yml. Default ./config.yml') do |path|
-        params[:config] = path || ''
-      end
       @parser.on('-h', '--help', 'Show help') do
         puts "\n#{@parser}\n"
         exit
