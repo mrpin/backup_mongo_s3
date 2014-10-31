@@ -16,7 +16,7 @@ module BackupMongoS3
       auth_options = ''
 
       unless username.nil? || username.empty? || password.nil? || password.empty?
-        auth_options = "-u '#{username}' -p '#{password}'"
+        auth_options = "-u '#{username}' -p '#{password}' --authenticationDatabase 'admin'"
       end
 
       "--host '#{host}' --port '#{port}' #{auth_options}"

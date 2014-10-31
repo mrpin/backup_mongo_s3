@@ -1,10 +1,10 @@
 Gem::Specification.new do |spec|
   spec.name          = 'backup_mongo_s3'
-  spec.version       = '0.0.1'
+  spec.version       = '0.0.4'
   spec.authors       = ['Yakupov Dima']
   spec.email         = ['yakupov.dima@mail.ru']
   spec.summary       = "Some summary"
-  spec.description   = "Some description"
+  spec.description   = "Command-line application for MongoDB backup(mongodump/mongorestore) to Amazon S3"
   spec.homepage      = ''
   spec.license       = 'MIT'
 

@@ -20,7 +20,9 @@ module BackupMongoS3
   end
 
   def self.root_path
-    Dir.pwd
+    @root_path if @root_path
+    spec = Gem::Specification.find_by_name(self.name)
+    @root_path = spec.gem_dir
   end
 end
 
