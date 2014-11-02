@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name          = 'backup_mongo_s3'
-  spec.version       = '0.0.4'
+  spec.version       = '0.0.5'
   spec.authors       = ['Yakupov Dima']
   spec.email         = ['yakupov.dima@mail.ru']
   spec.summary       = "Some summary"
@@ -14,4 +14,6 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency 'bundler', '~> 1.6'
+
+  spec.add_runtime_dependency 'aws-sdk', '~> 1.57.0'
 end

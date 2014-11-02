@@ -5,7 +5,7 @@ backup:
   # All backups older than [today - history_days] will be deleted when run backup/backup_all
   history_days: 5
 
-  # Temporary directory for dump files. Default system temp directory
+  # Temporary directory for dump files. Default: system temp directory
   temp_directory:
 
   # [minute] [hour] [day] [month] [weekday]

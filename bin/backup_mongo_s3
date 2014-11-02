@@ -6,6 +6,6 @@ begin
   BackupMongoS3::Application.new(ARGV).run
 rescue SystemExit
   # do nothing
-rescue Exception => err
-  abort "[abort] #{err.message}"
+rescue Exception => error
+  abort "[abort] #{error.message}"
 end

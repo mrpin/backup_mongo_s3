@@ -26,9 +26,9 @@ module BackupMongoS3
             raise 'config.yml::backup.dbs is empty'
           end
 
-          dbs_name = dbs_str.split(',').each { |db_name| db_name.strip! }
+          db_names = dbs_str.split(',').each { |db_name| db_name.strip! }
 
-          backup(dbs_name)
+          backup(db_names)
 
         when @params[:backup] # BACKUP
           backup([@params[:backup]])
@@ -53,7 +53,7 @@ module BackupMongoS3
 
         else
           puts "\n#{@parser}\n"
-          exit
+          exit(0)
       end
 
     end
@@ -62,7 +62,7 @@ module BackupMongoS3
 
     def show_backups_list(db_name)
 
-      backups = @storage.get_backups_list("#{db_name}")
+      backups = @storage.get_backups_list(db_name)
 
       if backups.empty?
         puts 'Backups not found'
@@ -82,17 +82,17 @@ module BackupMongoS3
       end
     end
 
-    def backup(dbs_name)
+    def backup(db_names)
 
       history_days_str = @config[:backup][:history_days]
 
       begin
-        history_days = history_days_str.to_i
+        history_days = Integer(history_days_str)
       rescue
         raise 'config.yml::backup.history_days is not integer'
       end
 
-      dbs_name.each do |db_name|
+      db_names.each do |db_name|
 
         puts "backup db #{db_name.upcase}:"
 
@@ -218,24 +218,24 @@ module BackupMongoS3
       @parser.on('--clear_cron', 'Clear backup_all job') do
         params[:cron_clear] = true
       end
-      @parser.on('-c', '--config PATH', String, 'Path to config *.yml. Default ./config.yml') do |path|
+      @parser.on('-c', '--config PATH', String, 'Path to config *.yml. Default: ./config.yml') do |path|
         params[:config] = path || ''
       end
       @parser.on('--create_config [PATH]', String, 'Create template config.yml in current/PATH directory') do |path|
         create_config(path)
-        exit
+        exit(0)
       end
       @parser.on('-h', '--help', 'Show help') do
         puts "\n#{@parser}\n"
-        exit
+        exit(0)
       end
 
       begin
         @parser.parse!(argv)
 
-      rescue OptionParser::ParseError => err
-        puts "#{err.message}\n\n#{@parser}"
-        exit
+      rescue OptionParser::ParseError => error
+        puts "#{error.message}\n\n#{@parser}"
+        exit(1)
       end
 
       if [params[:backup_all], params[:backup], params[:restore], params[:backups_list], params[:cron_update], params[:cron_clear]].compact.length > 1
