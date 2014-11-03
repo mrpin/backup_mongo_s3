@@ -17,6 +17,22 @@ mongo:
   username:
   password:
 
+  # If you do not specify an authentication database than database specified to backup(restore) holds the user’s credentials
+  authentication_database: admin
+
+  # mongodump
+
+  # Includes user and role definitions when performing mongodump on a specific database
+  dump_db_users_and_roles: true
+
+  # mongorestore
+
+  # Restore user and role definitions for the given database
+  restore_db_users_and_roles: true
+
+  # Modifies the restoration procedure to drop every collection from the target database before restoring the collection from the dumped backup
+  drop_collection: true
+
 s3:
   access_key_id: 'access_key_id'
   secret_access_key: 'secret_access_key'

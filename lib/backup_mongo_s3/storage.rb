@@ -35,8 +35,8 @@ module BackupMongoS3
 
         file.close
 
-      rescue Exception => err
-        raise "Error upload file <#{file_name}> to s3 <#{key}>: #{err.message}"
+      rescue Exception => error
+        raise "Error upload file <#{file_name}> to s3 <#{key}>: #{error.message}"
       end
 
     end
@@ -63,8 +63,8 @@ module BackupMongoS3
           raise 'Backup signature is not valid'
         end
 
-      rescue Exception => err
-        raise "Error download file <#{key}> from s3 to <#{file_name}>: #{err.message}"
+      rescue Exception => error
+        raise "Error download file <#{key}> from s3 to <#{file_name}>: #{error.message}"
       end
 
     end

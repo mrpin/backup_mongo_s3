@@ -79,12 +79,7 @@ module BackupMongoS3
     end
 
     def crontab_job
-      job = [@options[:time]]
-      job << BackupMongoS3.name
-      job << '--backup_all'
-      job << "--config #{@options[:config]}"
-
-      job.join(' ')
+      "#{@options[:time]} /bin/bash -l -c '#{BackupMongoS3.name} --backup_all --config #{@options[:config]}'"
     end
 
     def comment_base

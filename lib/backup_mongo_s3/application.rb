@@ -230,16 +230,10 @@ module BackupMongoS3
         exit(0)
       end
 
-      begin
-        @parser.parse!(argv)
-
-      rescue OptionParser::ParseError => error
-        puts "#{error.message}\n\n#{@parser}"
-        exit(1)
-      end
+      @parser.parse!(argv)
 
       if [params[:backup_all], params[:backup], params[:restore], params[:backups_list], params[:cron_update], params[:cron_clear]].compact.length > 1
-        raise 'Can only backup_all, backup, restore, backups_list, cron_update or cron_clear. Choose one.'
+        raise 'Can only backup_all, backup, restore, list_backups, write_cron or clear_cron. Choose one.'
       end
 
       if params[:config].nil? || params[:config] == ''
@@ -257,8 +251,8 @@ module BackupMongoS3
         config = YAML.load(File.read(config_path))
       rescue Errno::ENOENT
         raise "Could not find config file '#{config_path}'"
-      rescue ArgumentError => err
-        raise "Could not parse config file '#{config_path}' - #{err}"
+      rescue ArgumentError => error
+        raise "Could not parse config file '#{config_path}' - #{error}"
       end
 
       config.deep_symbolize_keys!
