@@ -97,7 +97,7 @@ module BackupMongoS3
         end
       end
 
-      @bucket.delete(old_backups) unless old_backups.empty?
+      @bucket.objects.delete(old_backups) unless old_backups.empty?
 
     end
 
